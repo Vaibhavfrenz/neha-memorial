@@ -1,13 +1,13 @@
 // Firebase Configuration for Neha Memorial Website
-// Replace with your actual Firebase config from Firebase Console
 
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyC4db5c4_fYkLlTrTcNuK0ONSwspsWVvVY",
+    authDomain: "neha-memorial-website-1f540.firebaseapp.com",
+    projectId: "neha-memorial-website-1f540",
+    storageBucket: "neha-memorial-website-1f540.firebasestorage.app",
+    messagingSenderId: "254686548750",
+    appId: "1:254686548750:web:e846cb2f7ec15c2ce23d5f",
+    measurementId: "G-LVV1T09C23"
 };
 
 // Initialize Firebase
