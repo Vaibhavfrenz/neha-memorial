@@ -13,9 +13,8 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// Initialize Firebase services
+// Initialize Firebase services (only Firestore needed)
 const db = firebase.firestore();
-const storage = firebase.storage();
 
 // Enable offline persistence
 db.enablePersistence()
@@ -28,5 +27,4 @@ db.enablePersistence()
     });
 
 // Export for use in other files
-window.db = db;
-window.storage = storage; 
+window.db = db; 

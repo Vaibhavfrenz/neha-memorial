@@ -1,6 +1,6 @@
 # Firebase Setup Guide for Neha Memorial Website
 
-This guide will help you set up Firebase to enable real-time sharing of candles, photos, and memories across all visitors.
+This guide will help you set up Firebase to enable real-time sharing of candles, photos, and memories across all visitors using the **FREE Firebase plan**.
 
 ## Step 1: Create Firebase Project
 
@@ -41,15 +41,7 @@ const firebaseConfig = {
 4. **Select a location** (choose closest to your visitors)
 5. **Click "Done"**
 
-## Step 5: Enable Storage
-
-1. **In Firebase Console**, go to "Storage"
-2. **Click "Get started"**
-3. **Choose "Start in test mode"** (for now)
-4. **Select a location** (same as Firestore)
-5. **Click "Done"**
-
-## Step 6: Set Up Security Rules
+## Step 5: Set Up Security Rules
 
 ### Firestore Rules
 1. **Go to Firestore Database → Rules**
@@ -80,29 +72,7 @@ service cloud.firestore {
 }
 ```
 
-### Storage Rules
-1. **Go to Storage → Rules**
-2. **Replace with these rules**:
-
-```javascript
-rules_version = '2';
-service firebase.storage {
-  match /b/{bucket}/o {
-    // Allow read access to all files
-    match /{allPaths=**} {
-      allow read: if true;
-    }
-    
-    // Allow upload to photos folder
-    match /photos/{allPaths=**} {
-      allow write: if request.resource.size < 5 * 1024 * 1024 // 5MB limit
-                   && request.resource.contentType.matches('image/.*');
-    }
-  }
-}
-```
-
-## Step 7: Deploy Your Website
+## Step 6: Deploy Your Website
 
 1. **Commit your changes**:
    ```bash
@@ -113,12 +83,26 @@ service firebase.storage {
 
 2. **Wait for GitHub Pages to deploy** (2-5 minutes)
 
-## Step 8: Test the Features
+## Step 7: Test the Features
 
 1. **Visit your website**: `https://vaibhavfrenz.github.io/neha-memorial`
 2. **Try lighting a candle** - it should appear for all visitors
-3. **Upload a photo** - it should be visible to everyone
+3. **Upload a photo** - it should be visible to everyone (max 2MB)
 4. **Add a memory** - it should show up in real-time
+
+## How It Works (Free Solution)
+
+### Photo Storage
+- **Photos are stored as base64 strings** in Firestore
+- **No Firebase Storage needed** (saves money)
+- **Max file size: 2MB** per photo
+- **Works with free Firebase plan**
+
+### Real-time Features
+- **Candles**: Stored in Firestore, real-time updates
+- **Photos**: Base64 in Firestore, instant sharing
+- **Memories**: Text in Firestore, live updates
+- **All data shared** across all visitors
 
 ## Troubleshooting
 
@@ -126,12 +110,13 @@ service firebase.storage {
 1. **Check browser console** for errors
 2. **Verify Firebase config** in `firebase-config.js`
 3. **Check Firestore rules** are set to allow read/write
-4. **Check Storage rules** allow photo uploads
+4. **Ensure Firestore is enabled** (not Realtime Database)
 
 ### Common Issues:
 - **"Firebase not initialized"**: Check if Firebase SDK is loading
-- **"Permission denied"**: Check Firestore/Storage rules
-- **"Upload failed"**: Check file size (max 5MB) and type (images only)
+- **"Permission denied"**: Check Firestore rules
+- **"Upload failed"**: Check file size (max 2MB) and type (images only)
+- **"Storage not found"**: We're not using Storage, only Firestore
 
 ## Security Notes
 
@@ -141,6 +126,13 @@ service firebase.storage {
 - Adding content moderation
 - Setting up admin controls
 
+## Cost Information
+
+✅ **This setup is completely FREE**:
+- **Firestore**: 1GB storage free, 50K reads/day, 20K writes/day
+- **No Firebase Storage**: Using base64 in Firestore instead
+- **No upgrade needed**: Works with Spark (free) plan
+
 ## Support
 
 If you need help:
@@ -149,4 +141,4 @@ If you need help:
 
 ---
 
-**Your memorial website will now have real-time features that allow everyone to share and see each other's candles, photos, and memories!** 🕯️📸💝 
+**Your memorial website will now have real-time features that allow everyone to share and see each other's candles, photos, and memories - all for FREE!** 🕯️📸💝 
