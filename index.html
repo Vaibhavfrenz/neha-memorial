@@ -7,6 +7,7 @@
     <meta name="description" content="A memorial website celebrating the life and memories of Neha Tomar">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header class="hero">
@@ -31,11 +32,78 @@
             </div>
         </section>
 
+        <!-- Candle Lighting Section -->
+        <section class="candle-section">
+            <div class="container">
+                <h2>Light a Candle</h2>
+                <p class="section-intro">Light a virtual candle in memory of Neha. Each candle represents a moment of remembrance and love.</p>
+                
+                <div class="candle-area">
+                    <div class="candle-container" id="candleContainer">
+                        <!-- Candles will be added here dynamically -->
+                    </div>
+                    
+                    <div class="light-candle-form">
+                        <h3>Light Your Candle</h3>
+                        <form id="candleForm">
+                            <input type="text" id="candleName" placeholder="Your name" required>
+                            <textarea id="candleMessage" placeholder="Your message (optional)" rows="3"></textarea>
+                            <button type="submit" class="btn-light-candle">
+                                <i class="fas fa-fire"></i> Light Candle
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="candle-stats">
+                    <div class="stat">
+                        <span class="stat-number" id="totalCandles">0</span>
+                        <span class="stat-label">Candles Lit</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="todayCandles">0</span>
+                        <span class="stat-label">Lit Today</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Photo Gallery -->
         <section class="gallery-section">
             <div class="container">
                 <h2>Photo Memories</h2>
-                <div class="gallery-grid">
+                
+                <!-- Photo Upload Section -->
+                <div class="photo-upload-section">
+                    <h3>Share Your Photos</h3>
+                    <p>Upload photos of Neha to add to our collection of memories.</p>
+                    
+                    <form id="photoUploadForm" class="upload-form">
+                        <div class="file-input-wrapper">
+                            <input type="file" id="photoFile" accept="image/*" required>
+                            <label for="photoFile" class="file-input-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                Choose Photo
+                            </label>
+                        </div>
+                        
+                        <input type="text" id="photoCaption" placeholder="Photo caption" required>
+                        <input type="text" id="photoAuthor" placeholder="Your name" required>
+                        
+                        <button type="submit" class="btn-upload">
+                            <i class="fas fa-upload"></i> Upload Photo
+                        </button>
+                    </form>
+                    
+                    <div class="upload-preview" id="uploadPreview" style="display: none;">
+                        <img id="previewImage" alt="Preview">
+                        <button type="button" id="removePreview" class="btn-remove">
+                            <i class="fas fa-times"></i> Remove
+                        </button>
+                    </div>
+                </div>
+
+                <div class="gallery-grid" id="galleryGrid">
                     <!-- Real photos from the user -->
                     <div class="gallery-item">
                         <img src="images/2d6eaf51-e621-47d3-bd3d-56a6b2aedb59.jpg" alt="Memory of Neha Tomar">
@@ -66,7 +134,68 @@
             </div>
         </section>
 
-        <!-- Memories Section -->
+        <!-- Memory Wall Section -->
+        <section class="memory-wall-section">
+            <div class="container">
+                <h2>Memory Wall</h2>
+                <p class="section-intro">Share your memories, thoughts, and messages for Neha. Your words will be a lasting tribute to her beautiful spirit.</p>
+                
+                <!-- Add Memory Form -->
+                <div class="memory-form-container">
+                    <form id="memoryForm" class="memory-form">
+                        <div class="form-row">
+                            <input type="text" id="memoryName" placeholder="Your name" required>
+                            <input type="email" id="memoryEmail" placeholder="Your email (optional)">
+                        </div>
+                        <textarea id="memoryMessage" placeholder="Share your memory, message, or tribute..." rows="4" required></textarea>
+                        <button type="submit" class="btn-add-memory">
+                            <i class="fas fa-heart"></i> Add Memory
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Memory Wall Display -->
+                <div class="memory-wall" id="memoryWall">
+                    <div class="memory-card">
+                        <div class="memory-content">
+                            <p>"Neha Tomar had the most beautiful smile that could light up any room. She was always there to listen and offer comfort to anyone who needed it."</p>
+                            <div class="memory-author">- [Family Member/Friend Name]</div>
+                            <div class="memory-date">December 2024</div>
+                        </div>
+                    </div>
+                    <div class="memory-card">
+                        <div class="memory-content">
+                            <p>"I'll never forget her laughter and the way she made everyone feel special. She had a heart of gold and will be deeply missed."</p>
+                            <div class="memory-author">- [Family Member/Friend Name]</div>
+                            <div class="memory-date">December 2024</div>
+                        </div>
+                    </div>
+                    <div class="memory-card">
+                        <div class="memory-content">
+                            <p>"Neha Tomar was not just a sister, but a best friend. Her strength and courage inspired us all."</p>
+                            <div class="memory-author">- [Family Member/Friend Name]</div>
+                            <div class="memory-date">December 2024</div>
+                        </div>
+                    </div>
+                    <div class="memory-card">
+                        <div class="memory-content">
+                            <p>"She had a way of making every moment special. Her kindness and generosity knew no bounds."</p>
+                            <div class="memory-author">- [Family Member/Friend Name]</div>
+                            <div class="memory-date">December 2024</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="memory-stats">
+                    <div class="stat">
+                        <span class="stat-number" id="totalMemories">4</span>
+                        <span class="stat-label">Memories Shared</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Memories Section (Original) -->
         <section class="memories-section">
             <div class="container">
                 <h2>Memories & Tributes</h2>
@@ -99,6 +228,13 @@
             </div>
         </section>
     </main>
+
+    <!-- Lightbox Modal for Photos -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content">
+        <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
 
     <footer class="footer">
         <div class="container">
