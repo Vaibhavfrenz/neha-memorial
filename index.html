@@ -183,5 +183,50 @@
     <!-- Firebase Configuration -->
     <script src="firebase-config.js"></script>
     <script src="script.js"></script>
+
+    <!-- Photo Upload FAB and Modal -->
+    <div class="fab fab-photo" id="fabPhotoUpload" title="Upload Photo" aria-label="Upload Photo">
+        <i class="fas fa-camera"></i>
+    </div>
+    <div class="modal" id="photoUploadModal" aria-modal="true" role="dialog" style="display:none;">
+        <div class="modal-content">
+            <span class="modal-close" id="closePhotoUploadModal">&times;</span>
+            <h3>Share Your Photo</h3>
+            <form id="photoUploadForm" class="upload-form">
+                <div class="file-input-wrapper">
+                    <input type="file" id="photoFile" accept="image/*" required>
+                    <label for="photoFile" class="file-input-label">
+                        <i class="fas fa-cloud-upload-alt"></i> Choose Photo
+                    </label>
+                </div>
+                <input type="text" id="photoCaption" placeholder="Photo caption (optional)">
+                <input type="text" id="photoAuthor" placeholder="Your name (optional)">
+                <button type="submit" class="btn-upload">
+                    <i class="fas fa-upload"></i> Upload Photo
+                </button>
+            </form>
+        </div>
+    </div>
+    <!-- Memory Upload FAB and Modal -->
+    <div class="fab fab-memory" id="fabMemoryUpload" title="Share Memory" aria-label="Share Memory">
+        <i class="fas fa-heart"></i>
+    </div>
+    <div class="modal" id="memoryUploadModal" aria-modal="true" role="dialog" style="display:none;">
+        <div class="modal-content">
+            <span class="modal-close" id="closeMemoryUploadModal">&times;</span>
+            <h3>Share a Memory</h3>
+            <form id="memoryForm" class="memory-form">
+                <div class="form-row">
+                    <input type="text" id="memoryName" placeholder="Your name" required>
+                    <input type="email" id="memoryEmail" placeholder="Your email (optional)">
+                </div>
+                <textarea id="memoryMessage" placeholder="Share your memory, message, or tribute..." rows="4" required></textarea>
+                <button type="submit" class="btn-add-memory">
+                    <i class="fas fa-heart"></i> Add Memory
+                </button>
+            </form>
+        </div>
+    </div>
+    <!-- Place the FABs and modals just after each slideshow section -->
 </body>
 </html> 
