@@ -937,4 +937,65 @@ a:focus, button:focus {
     .slideshow-image-wrapper img {
         max-height: 220px;
     }
-} 
+}
+
+/* Memory Slideshow Carousel Styles */
+.memory-slideshow-container {
+    position: relative;
+    max-width: 600px;
+    margin: 40px auto 0 auto;
+    background: rgba(255,255,255,0.85);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    padding: 32px 24px 24px 24px;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.memory-slideshow-content {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #333;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.memory-slideshow-content .memory-text {
+    font-size: 1.25rem;
+    font-style: italic;
+    margin-bottom: 12px;
+    color: #444;
+}
+.memory-slideshow-content .memory-meta {
+    font-size: 0.95rem;
+    color: #888;
+}
+.slideshow-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.12);
+    border: none;
+    color: #333;
+    font-size: 2rem;
+    padding: 8px 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.2s;
+}
+.slideshow-arrow.left {
+    left: 10px;
+}
+.slideshow-arrow.right {
+    right: 10px;
+}
+.slideshow-arrow:hover {
+    background: rgba(0,0,0,0.22);
+}
+/* Hide old memory wall grid if present */
+.memory-wall { display: none !important; } 
