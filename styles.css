@@ -74,10 +74,17 @@ h3 {
 }
 
 .hero-name {
-    font-size: 4rem;
+    font-size: 4.5rem;
     margin-bottom: 1rem;
     font-weight: 700;
     letter-spacing: 1px;
+    color: #fff;
+    background: rgba(44, 62, 80, 0.7);
+    padding: 0.5em 1.5em;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(44, 62, 80, 0.15);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 1px 0 #fff;
+    display: inline-block;
 }
 
 .hero-dates {
