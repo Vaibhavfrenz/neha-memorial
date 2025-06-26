@@ -1709,4 +1709,36 @@ a:focus, button:focus {
         top: env(safe-area-inset-top, 20px);
         right: env(safe-area-inset-right, 20px);
     }
+}
+
+.compact-candle-stats {
+    margin-top: 20px;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0;
+    padding: 0;
+}
+.compact-candle-stats .stat {
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    font-size: 1.1rem;
+    min-width: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.compact-candle-stats .stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+.compact-candle-stats .stat-label {
+    font-size: 0.9rem;
+    color: #888;
+    font-weight: 500;
+    letter-spacing: 0.2px;
 } 
