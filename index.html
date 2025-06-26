@@ -15,6 +15,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
+    <div class="animated-bg"></div>
     <div class="visitor-corner-stats" id="visitorCornerStats">
         <div class="corner-stat">
             <i class="fas fa-users"></i>
@@ -36,7 +37,10 @@
         </div>
         <div class="hero-overlay"></div>
     </header>
-
+    <!-- Wavy Divider -->
+    <div class="wavy-divider">
+        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 40C360 80 1080 0 1440 40V80H0V40Z" fill="#f8f9fa"/></svg>
+    </div>
     <main>
         <!-- About Section -->
         <section class="about-section animate-on-scroll">
@@ -47,18 +51,19 @@
                 </p>
             </div>
         </section>
-
+        <!-- Wavy Divider -->
+        <div class="wavy-divider">
+            <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 40C360 80 1080 0 1440 40V80H0V40Z" fill="#fff"/></svg>
+        </div>
         <!-- Candle Lighting Section -->
         <section class="candle-section animate-on-scroll">
             <div class="container">
                 <h2>Light a Candle</h2>
                 <p class="section-intro">Light a virtual candle in memory of Neha. Each candle represents a moment of remembrance and love.</p>
-                
                 <div class="candle-area">
                     <div class="candle-container" id="candleContainer">
                         <!-- Candles will be added here dynamically -->
                     </div>
-                    
                     <div class="light-candle-form">
                         <h3>Light Your Candle</h3>
                         <form id="candleForm">
@@ -70,7 +75,6 @@
                         </form>
                     </div>
                 </div>
-                
                 <div class="candle-stats compact-candle-stats">
                     <div class="stat">
                         <span class="stat-number" id="totalCandles">0</span>
@@ -79,17 +83,18 @@
                 </div>
             </div>
         </section>
-
+        <!-- Wavy Divider -->
+        <div class="wavy-divider">
+            <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 40C360 80 1080 0 1440 40V80H0V40Z" fill="#f8f9fa"/></svg>
+        </div>
         <!-- Photo Gallery -->
         <section class="gallery-section animate-on-scroll">
             <div class="container">
                 <h2>Photo Memories</h2>
-                
                 <!-- Photo Upload Section -->
                 <div class="photo-upload-section">
                     <h3>Share Your Photos</h3>
                     <p>Upload photos of Neha to add to our collection of memories. (Max 2MB per photo)</p>
-                    
                     <form id="photoUploadForm" class="upload-form">
                         <div class="file-input-wrapper">
                             <input type="file" id="photoFile" accept="image/*" required>
@@ -98,15 +103,12 @@
                                 Choose Photo
                             </label>
                         </div>
-                        
                         <input type="text" id="photoCaption" placeholder="Photo caption" required>
                         <input type="text" id="photoAuthor" placeholder="Your name" required>
-                        
                         <button type="submit" class="btn-upload">
                             <i class="fas fa-upload"></i> Upload Photo
                         </button>
                     </form>
-                    
                     <div class="upload-preview" id="uploadPreview" style="display: none;">
                         <img id="previewImage" alt="Preview">
                         <button type="button" id="removePreview" class="btn-remove">
@@ -114,7 +116,6 @@
                         </button>
                     </div>
                 </div>
-
                 <!-- Slideshow Carousel -->
                 <div class="slideshow-container" id="slideshowContainer">
                     <div class="slideshow-image-wrapper">
@@ -126,13 +127,15 @@
                 </div>
             </div>
         </section>
-
+        <!-- Wavy Divider -->
+        <div class="wavy-divider">
+            <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 40C360 80 1080 0 1440 40V80H0V40Z" fill="#fff"/></svg>
+        </div>
         <!-- Memory Wall Section -->
         <section class="memory-wall-section animate-on-scroll">
             <div class="container">
                 <h2>Memory Wall</h2>
                 <p class="section-intro">Share your memories, thoughts, and messages for Neha. Your words will be a lasting tribute to her beautiful spirit.</p>
-                
                 <!-- Add Memory Form -->
                 <div class="memory-form-container">
                     <form id="memoryForm" class="memory-form">
@@ -146,14 +149,12 @@
                         </button>
                     </form>
                 </div>
-                
                 <!-- Memory Wall Slideshow Carousel -->
                 <div class="memory-slideshow-container" id="memorySlideshowContainer">
                     <div class="memory-slideshow-content" id="memorySlideshowContent"></div>
                     <button class="slideshow-arrow left" id="memorySlideshowPrev">&#10094;</button>
                     <button class="slideshow-arrow right" id="memorySlideshowNext">&#10095;</button>
                 </div>
-                
                 <div class="memory-stats hide-memory-stats">
                     <div class="stat">
                         <span class="stat-number" id="totalMemories">4</span>
@@ -162,6 +163,10 @@
                 </div>
             </div>
         </section>
+        <!-- Wavy Divider -->
+        <div class="wavy-divider">
+            <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 40C360 80 1080 0 1440 40V80H0V40Z" fill="#f8f9fa"/></svg>
+        </div>
     </main>
 
     <!-- Lightbox Modal for Photos -->

@@ -1741,4 +1741,112 @@ a:focus, button:focus {
     color: #888;
     font-weight: 500;
     letter-spacing: 0.2px;
+}
+
+/* Animated Background */
+.animated-bg {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(120deg, #fff8f0 0%, #f8f9fa 100%);
+    overflow: hidden;
+}
+.animated-bg::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 20% 30%, #ffe6e6 0%, transparent 60%),
+                radial-gradient(circle at 80% 70%, #e6f7ff 0%, transparent 60%),
+                radial-gradient(circle at 60% 10%, #f9e6ff 0%, transparent 60%);
+    opacity: 0.7;
+    z-index: 1;
+    pointer-events: none;
+}
+.animated-bg .bokeh {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.18;
+    pointer-events: none;
+    animation: bokehFloat 16s linear infinite;
+}
+@keyframes bokehFloat {
+    0% { transform: translateY(0) scale(1); opacity: 0.18; }
+    50% { opacity: 0.28; }
+    100% { transform: translateY(-60px) scale(1.1); opacity: 0.18; }
+}
+
+/* Wavy SVG Divider */
+.wavy-divider {
+    width: 100vw;
+    min-width: 100%;
+    line-height: 0;
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    padding: 0;
+}
+.wavy-divider svg {
+    display: block;
+    width: 100%;
+    height: 60px;
+    min-height: 40px;
+}
+
+/* Animated Candle Flame & Glow */
+.candle-flame {
+    position: relative;
+    width: 18px;
+    height: 28px;
+    margin: 0 auto 2px auto;
+    background: none;
+    z-index: 2;
+}
+.candle-flame::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 18px;
+    height: 28px;
+    background: radial-gradient(ellipse at center, #fffbe6 0%, #ffe066 60%, #ffb347 100%);
+    border-radius: 60% 60% 60% 60%/80% 80% 60% 60%;
+    transform: translate(-50%, -60%) scale(1);
+    opacity: 0.95;
+    filter: blur(0.5px);
+    animation: flameFlicker 1.5s infinite alternate cubic-bezier(0.4,0,0.2,1);
+    z-index: 2;
+}
+.candle-flame::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    width: 36px;
+    height: 36px;
+    background: radial-gradient(circle, #ffe066 0%, #fffbe6 60%, transparent 100%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.45;
+    filter: blur(6px);
+    z-index: 1;
+    pointer-events: none;
+}
+@keyframes flameFlicker {
+    0% { transform: translate(-50%, -60%) scale(1) rotate(-2deg); opacity: 0.92; }
+    20% { transform: translate(-50%, -62%) scale(1.05) rotate(2deg); opacity: 1; }
+    40% { transform: translate(-50%, -58%) scale(0.98) rotate(-1deg); opacity: 0.96; }
+    60% { transform: translate(-50%, -61%) scale(1.03) rotate(1deg); opacity: 0.98; }
+    80% { transform: translate(-50%, -59%) scale(1.01) rotate(-2deg); opacity: 0.95; }
+    100% { transform: translate(-50%, -60%) scale(1) rotate(1deg); opacity: 0.92; }
+}
+.candle {
+    box-shadow: 0 0 16px 4px #ffe06644, 0 0 32px 8px #fffbe622;
+    transition: box-shadow 0.3s;
+}
+.candle:hover {
+    box-shadow: 0 0 32px 12px #ffe06688, 0 0 48px 16px #fffbe644;
 } 
