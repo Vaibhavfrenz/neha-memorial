@@ -284,6 +284,31 @@ h3 {
     align-items: flex-start;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+.candles-lit-label {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    background: rgba(255,255,255,0.85);
+    color: #e67e22;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 16px;
+    padding: 4px 14px 4px 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.candles-lit-label i {
+    color: #e67e22;
+    font-size: 1.1em;
+    margin-right: 2px;
 }
 
 .candle {
