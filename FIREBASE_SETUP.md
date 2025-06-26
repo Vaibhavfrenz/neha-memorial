@@ -56,7 +56,7 @@ service cloud.firestore {
       allow read: if true;
     }
     
-    // Allow write access to candles, photos, and memories
+    // Allow write access to candles, photos, memories, and visitors
     match /candles/{document} {
       allow write: if true;
     }
@@ -66,6 +66,10 @@ service cloud.firestore {
     }
     
     match /memories/{document} {
+      allow write: if true;
+    }
+    
+    match /visitors/{document} {
       allow write: if true;
     }
   }
@@ -102,7 +106,16 @@ service cloud.firestore {
 - **Candles**: Stored in Firestore, real-time updates
 - **Photos**: Base64 in Firestore, instant sharing
 - **Memories**: Text in Firestore, live updates
+- **Visitors**: Location data in Firestore, visitor statistics
 - **All data shared** across all visitors
+
+### Visitor Tracking
+- **Anonymous tracking** - no personal information collected
+- **Geographic data** - country, city, region (from IP address)
+- **Visitor statistics** - total visitors, countries, cities
+- **Recent visitors** - shows last 6 visitors with location
+- **Real-time updates** - stats update automatically
+- **Privacy-friendly** - only collects public IP geolocation data
 
 ## Troubleshooting
 
