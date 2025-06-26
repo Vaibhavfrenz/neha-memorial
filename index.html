@@ -23,46 +23,21 @@
         <div class="hero-overlay"></div>
     </header>
 
-    <!-- Visitor Counter Section -->
-    <section class="visitor-section animate-on-scroll">
-        <div class="container">
-            <div class="visitor-stats">
-                <div class="visitor-stat">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-number" id="totalVisitors">0</span>
-                        <span class="stat-label">Total Visitors</span>
-                    </div>
-                </div>
-                <div class="visitor-stat">
-                    <div class="stat-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-number" id="countriesCount">0</span>
-                        <span class="stat-label">Countries</span>
-                    </div>
-                </div>
-                <div class="visitor-stat">
-                    <div class="stat-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-number" id="citiesCount">0</span>
-                        <span class="stat-label">Cities</span>
-                    </div>
-                </div>
-            </div>
-            <div class="geographic-data">
-                <h3>Recent Visitors</h3>
-                <div class="recent-visitors" id="recentVisitors">
-                    <!-- Recent visitors will be populated here -->
-                </div>
-            </div>
+    <!-- Compact Visitor Stats Corner Display -->
+    <div class="visitor-corner-stats" id="visitorCornerStats">
+        <div class="corner-stat">
+            <i class="fas fa-users"></i>
+            <span id="totalVisitors">0</span>
         </div>
-    </section>
+        <div class="corner-stat">
+            <i class="fas fa-globe"></i>
+            <span id="countriesCount">0</span>
+        </div>
+        <div class="corner-stat">
+            <i class="fas fa-map-marker-alt"></i>
+            <span id="citiesCount">0</span>
+        </div>
+    </div>
 
     <main>
         <!-- About Section -->
