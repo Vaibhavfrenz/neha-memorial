@@ -1695,4 +1695,18 @@ a:focus, button:focus {
     }
 }
 
-.hide-memory-stats { display: none !important; } 
+.hide-memory-stats { display: none !important; }
+
+/* iOS/Safari fix for fixed corner stats */
+.visitor-corner-stats {
+    z-index: 9999 !important;
+    will-change: transform;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .visitor-corner-stats {
+        position: fixed !important;
+        top: env(safe-area-inset-top, 20px);
+        right: env(safe-area-inset-right, 20px);
+    }
+} 
