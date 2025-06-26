@@ -1693,4 +1693,6 @@ a:focus, button:focus {
         font-size: 0.8rem;
         min-width: 16px;
     }
-} 
+}
+
+.hide-memory-stats { display: none !important; } 
