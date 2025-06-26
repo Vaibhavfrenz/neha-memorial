@@ -976,8 +976,8 @@ h3 {
 
 /* Footer */
 .footer {
-    background: #2c3e50;
-    color: white;
+    background: rgba(44, 62, 80, 0.95);
+    color: #2c3e50;
     text-align: center;
     padding: 40px 0;
     position: relative;
@@ -990,13 +990,15 @@ h3 {
 
 .footer-note {
     font-style: italic;
-    opacity: 0.8;
+    opacity: 0.9;
+    color: #2c3e50;
 }
 
 .copyright {
     font-size: 0.9rem;
-    opacity: 0.7;
+    opacity: 0.8;
     margin-top: 20px;
+    color: #2c3e50;
 }
 
 /* Responsive Design */
