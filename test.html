@@ -25,24 +25,8 @@
             </div>
         </div>
         
-        <h2>Testing Slideshow Arrows</h2>
-        <div class="slideshow-container" style="position: relative; height: 300px; background: #e0e0e0; border-radius: 12px;">
-            <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
-                <h3>Slideshow Content</h3>
-            </div>
-            <button class="slideshow-arrow left" id="slideshowPrev">&#10094;</button>
-            <button class="slideshow-arrow right" id="slideshowNext">&#10095;</button>
-        </div>
-        
-        <h2>Testing Wavy Dividers</h2>
-        <div class="wavy-divider">
-            <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 40C360 80 1080 0 1440 40V80H0V40Z" fill="#f8f9fa"/>
-            </svg>
-        </div>
-        
-        <h2>Testing Candles</h2>
-        <div class="candle-area">
+        <h2>Testing Candle Area with FAB</h2>
+        <div class="candle-area" style="margin: 20px 0;">
             <div class="candle-container">
                 <div class="candles-lit-label">
                     <i class="fas fa-fire"></i> <span>3</span>
@@ -63,6 +47,25 @@
                     <div class="candle-name">Mike</div>
                 </div>
             </div>
+            <div class="fab fab-candle" id="fabCandleLight2" title="Light a Candle" aria-label="Light a Candle">
+                <i class="fas fa-fire"></i>
+            </div>
+        </div>
+        
+        <h2>Testing Slideshow Arrows</h2>
+        <div class="slideshow-container" style="position: relative; height: 300px; background: #e0e0e0; border-radius: 12px;">
+            <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                <h3>Slideshow Content</h3>
+            </div>
+            <button class="slideshow-arrow left" id="slideshowPrev">&#10094;</button>
+            <button class="slideshow-arrow right" id="slideshowNext">&#10095;</button>
+        </div>
+        
+        <h2>Testing Wavy Dividers</h2>
+        <div class="wavy-divider">
+            <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 40C360 80 1080 0 1440 40V80H0V40Z" fill="#f8f9fa"/>
+            </svg>
         </div>
     </div>
     
@@ -78,6 +81,10 @@
         
         document.getElementById('fabCandleLight').addEventListener('click', () => {
             alert('Candle lighting FAB clicked!');
+        });
+        
+        document.getElementById('fabCandleLight2').addEventListener('click', () => {
+            alert('Candle lighting FAB in candle area clicked!');
         });
         
         // Test slideshow arrows

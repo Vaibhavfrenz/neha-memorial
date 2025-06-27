@@ -301,6 +301,7 @@ h3 {
     box-shadow: 0 8px 32px rgba(0,0,0,0.1);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.2);
+    position: relative;
 }
 
 .candle-container {
@@ -1454,7 +1455,7 @@ a:focus, button:focus {
 }
 
 .fab-candle { 
-    right: 152px; 
+    right: 32px; 
     background: #ffd700; 
     color: #e67e22; 
 }
@@ -1525,7 +1526,7 @@ a:focus, button:focus {
     }
     
     .fab-candle { 
-        right: 102px; 
+        right: 12px; 
     }
     
     .slideshow-caption, .memory-slideshow-content { 
