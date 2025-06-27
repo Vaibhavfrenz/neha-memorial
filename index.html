@@ -184,7 +184,8 @@
     <script src="firebase-config.js"></script>
     <script src="script.js"></script>
 
-    <!-- Photo Upload FAB and Modal -->
+    <!-- FABs and Modals for all sections -->
+    <!-- Photo Memories Section -->
     <div class="fab fab-photo" id="fabPhotoUpload" title="Upload Photo" aria-label="Upload Photo">
         <i class="fas fa-camera"></i>
     </div>
@@ -207,7 +208,7 @@
             </form>
         </div>
     </div>
-    <!-- Memory Upload FAB and Modal -->
+    <!-- Memory Wall Section -->
     <div class="fab fab-memory" id="fabMemoryUpload" title="Share Memory" aria-label="Share Memory">
         <i class="fas fa-heart"></i>
     </div>
@@ -223,6 +224,23 @@
                 <textarea id="memoryMessage" placeholder="Share your memory, message, or tribute..." rows="4" required></textarea>
                 <button type="submit" class="btn-add-memory">
                     <i class="fas fa-heart"></i> Add Memory
+                </button>
+            </form>
+        </div>
+    </div>
+    <!-- Candle Lighting Section -->
+    <div class="fab fab-candle" id="fabCandleLight" title="Light a Candle" aria-label="Light a Candle">
+        <i class="fas fa-fire"></i>
+    </div>
+    <div class="modal" id="candleLightModal" aria-modal="true" role="dialog" style="display:none;">
+        <div class="modal-content">
+            <span class="modal-close" id="closeCandleLightModal">&times;</span>
+            <h3>Light a Candle</h3>
+            <form id="candleForm">
+                <input type="text" id="candleName" placeholder="Your name" required>
+                <textarea id="candleMessage" placeholder="Your message (optional)" rows="3"></textarea>
+                <button type="submit" class="btn-light-candle">
+                    <i class="fas fa-fire"></i> Light Candle
                 </button>
             </form>
         </div>
