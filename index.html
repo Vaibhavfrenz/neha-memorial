@@ -66,16 +66,9 @@
                             <i class="fas fa-fire"></i> <span id="totalCandles">0</span>
                         </div>
                         <!-- Candles will be added here dynamically -->
-                    </div>
-                    <div class="light-candle-form">
-                        <h3>Light Your Candle</h3>
-                        <form id="candleForm">
-                            <input type="text" id="candleName" placeholder="Your name" required>
-                            <textarea id="candleMessage" placeholder="Your message (optional)" rows="3"></textarea>
-                            <button type="submit" class="btn-light-candle">
-                                <i class="fas fa-fire"></i> Light Candle
-                            </button>
-                        </form>
+                        <div class="fab fab-candle" id="fabCandleLight" title="Light a Candle" aria-label="Light a Candle">
+                            <i class="fas fa-fire"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,32 +81,6 @@
         <section class="gallery-section animate-on-scroll">
             <div class="container">
                 <h2>Photo Memories</h2>
-                <!-- Photo Upload Section -->
-                <div class="photo-upload-section">
-                    <h3>Share Your Photos</h3>
-                    <p>Upload photos of Neha to add to our collection of memories. (Max 2MB per photo)</p>
-                    <form id="photoUploadForm" class="upload-form">
-                        <div class="file-input-wrapper">
-                            <input type="file" id="photoFile" accept="image/*" required>
-                            <label for="photoFile" class="file-input-label">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                Choose Photo
-                            </label>
-                        </div>
-                        <input type="text" id="photoCaption" placeholder="Photo caption (optional)">
-                        <input type="text" id="photoAuthor" placeholder="Your name (optional)">
-                        <button type="submit" class="btn-upload">
-                            <i class="fas fa-upload"></i> Upload Photo
-                        </button>
-                    </form>
-                    <div class="upload-preview" id="uploadPreview" style="display: none;">
-                        <img id="previewImage" alt="Preview">
-                        <button type="button" id="removePreview" class="btn-remove">
-                            <i class="fas fa-times"></i> Remove
-                        </button>
-                    </div>
-                </div>
-                <!-- Slideshow Carousel -->
                 <div class="slideshow-container" id="slideshowContainer">
                     <div class="slideshow-image-wrapper">
                         <img id="slideshowImage" src="images/2d6eaf51-e621-47d3-bd3d-56a6b2aedb59.jpg" alt="Memory of Neha Tomar">
@@ -121,6 +88,9 @@
                     <div class="slideshow-caption" id="slideshowCaption">A precious memory</div>
                     <button class="slideshow-arrow left" id="slideshowPrev">&#10094;</button>
                     <button class="slideshow-arrow right" id="slideshowNext">&#10095;</button>
+                    <div class="fab fab-photo" id="fabPhotoUpload" title="Upload Photo" aria-label="Upload Photo">
+                        <i class="fas fa-camera"></i>
+                    </div>
                 </div>
             </div>
         </section>
@@ -133,24 +103,13 @@
             <div class="container">
                 <h2>Memory Wall</h2>
                 <p class="section-intro">Share your memories, thoughts, and messages for Neha. Your words will be a lasting tribute to her beautiful spirit.</p>
-                <!-- Add Memory Form -->
-                <div class="memory-form-container">
-                    <form id="memoryForm" class="memory-form">
-                        <div class="form-row">
-                            <input type="text" id="memoryName" placeholder="Your name" required>
-                            <input type="email" id="memoryEmail" placeholder="Your email (optional)">
-                        </div>
-                        <textarea id="memoryMessage" placeholder="Share your memory, message, or tribute..." rows="4" required></textarea>
-                        <button type="submit" class="btn-add-memory">
-                            <i class="fas fa-heart"></i> Add Memory
-                        </button>
-                    </form>
-                </div>
-                <!-- Memory Wall Slideshow Carousel -->
                 <div class="memory-slideshow-container" id="memorySlideshowContainer">
                     <div class="memory-slideshow-content" id="memorySlideshowContent"></div>
                     <button class="slideshow-arrow left" id="memorySlideshowPrev">&#10094;</button>
                     <button class="slideshow-arrow right" id="memorySlideshowNext">&#10095;</button>
+                    <div class="fab fab-memory" id="fabMemoryUpload" title="Share Memory" aria-label="Share Memory">
+                        <i class="fas fa-heart"></i>
+                    </div>
                 </div>
                 <div class="memory-stats hide-memory-stats">
                     <div class="stat">
@@ -186,9 +145,6 @@
 
     <!-- FABs and Modals for all sections -->
     <!-- Photo Memories Section -->
-    <div class="fab fab-photo" id="fabPhotoUpload" title="Upload Photo" aria-label="Upload Photo">
-        <i class="fas fa-camera"></i>
-    </div>
     <div class="modal" id="photoUploadModal" aria-modal="true" role="dialog" style="display:none;">
         <div class="modal-content">
             <span class="modal-close" id="closePhotoUploadModal">&times;</span>
@@ -209,9 +165,6 @@
         </div>
     </div>
     <!-- Memory Wall Section -->
-    <div class="fab fab-memory" id="fabMemoryUpload" title="Share Memory" aria-label="Share Memory">
-        <i class="fas fa-heart"></i>
-    </div>
     <div class="modal" id="memoryUploadModal" aria-modal="true" role="dialog" style="display:none;">
         <div class="modal-content">
             <span class="modal-close" id="closeMemoryUploadModal">&times;</span>
@@ -229,9 +182,6 @@
         </div>
     </div>
     <!-- Candle Lighting Section -->
-    <div class="fab fab-candle" id="fabCandleLight" title="Light a Candle" aria-label="Light a Candle">
-        <i class="fas fa-fire"></i>
-    </div>
     <div class="modal" id="candleLightModal" aria-modal="true" role="dialog" style="display:none;">
         <div class="modal-content">
             <span class="modal-close" id="closeCandleLightModal">&times;</span>
