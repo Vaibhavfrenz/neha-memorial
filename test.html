@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Neha Memorial</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Test Page - Neha Memorial</h1>
+        
+        <h2>Testing FAB Buttons</h2>
+        <div style="position: relative; height: 200px; background: #f0f0f0; border-radius: 12px; margin: 20px 0;">
+            <div class="fab fab-photo" id="fabPhotoUpload" title="Upload Photo" aria-label="Upload Photo">
+                <i class="fas fa-camera"></i>
+            </div>
+            <div class="fab fab-memory" id="fabMemoryUpload" title="Share Memory" aria-label="Share Memory">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="fab fab-candle" id="fabCandleLight" title="Light a Candle" aria-label="Light a Candle">
+                <i class="fas fa-fire"></i>
+            </div>
+        </div>
+        
+        <h2>Testing Slideshow Arrows</h2>
+        <div class="slideshow-container" style="position: relative; height: 300px; background: #e0e0e0; border-radius: 12px;">
+            <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                <h3>Slideshow Content</h3>
+            </div>
+            <button class="slideshow-arrow left" id="slideshowPrev">&#10094;</button>
+            <button class="slideshow-arrow right" id="slideshowNext">&#10095;</button>
+        </div>
+        
+        <h2>Testing Wavy Dividers</h2>
+        <div class="wavy-divider">
+            <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 40C360 80 1080 0 1440 40V80H0V40Z" fill="#f8f9fa"/>
+            </svg>
+        </div>
+        
+        <h2>Testing Candles</h2>
+        <div class="candle-area">
+            <div class="candle-container">
+                <div class="candles-lit-label">
+                    <i class="fas fa-fire"></i> <span>3</span>
+                </div>
+                <div class="candle">
+                    <div class="candle-flame"></div>
+                    <div class="candle-body"></div>
+                    <div class="candle-name">John</div>
+                </div>
+                <div class="candle">
+                    <div class="candle-flame"></div>
+                    <div class="candle-body"></div>
+                    <div class="candle-name">Sarah</div>
+                </div>
+                <div class="candle">
+                    <div class="candle-flame"></div>
+                    <div class="candle-body"></div>
+                    <div class="candle-name">Mike</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Test FAB functionality
+        document.getElementById('fabPhotoUpload').addEventListener('click', () => {
+            alert('Photo upload FAB clicked!');
+        });
+        
+        document.getElementById('fabMemoryUpload').addEventListener('click', () => {
+            alert('Memory upload FAB clicked!');
+        });
+        
+        document.getElementById('fabCandleLight').addEventListener('click', () => {
+            alert('Candle lighting FAB clicked!');
+        });
+        
+        // Test slideshow arrows
+        document.getElementById('slideshowPrev').addEventListener('click', () => {
+            alert('Previous arrow clicked!');
+        });
+        
+        document.getElementById('slideshowNext').addEventListener('click', () => {
+            alert('Next arrow clicked!');
+        });
+    </script>
+</body>
+</html> 
