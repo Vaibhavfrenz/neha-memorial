@@ -32,8 +32,8 @@ const Rituals = (() => {
         const clockLabel = document.getElementById('momentClockLabel');
         if (!clockValue) return;
 
-        // Neha's date of passing — update this to the actual date
-        const passingDate = new Date('2023-10-01T00:00:00');
+        const passingDate = new Date('2025-04-22T00:00:00');
+        // const birthDate = new Date('1986-09-05T00:00:00'); // 38 years lived
 
         function formatClockValue(lang) {
             const now = new Date();
@@ -151,7 +151,7 @@ const Rituals = (() => {
 
     // --- Milestone Acknowledgment (#14) ---
     function initMilestoneCheck() {
-        const passingDate = new Date('2023-10-01T00:00:00');
+        const passingDate = new Date('2025-04-22T00:00:00');
         const now = new Date();
         const totalDays = Math.floor((now - passingDate) / 86400000);
         const milestones = [100, 365, 500, 730, 1000, 1500, 2000];
