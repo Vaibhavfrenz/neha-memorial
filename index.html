@@ -15,16 +15,19 @@
     <meta property="og:image" content="https://vaibhavfrenz.github.io/neha-memorial/images/2d6eaf51-e621-47d3-bd3d-56a6b2aedb59.jpg">
     <meta property="og:site_name" content="Neha Tomar — In Loving Memory">
     <meta name="twitter:card" content="summary_large_image">
+
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600&family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&family=Tiro+Devanagari:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
     <div class="animated-bg"></div>
+
+    <!-- Visitor stats + language/shanti toggles -->
     <div class="visitor-corner-stats" id="visitorCornerStats">
         <div class="corner-stat">
             <i class="fas fa-users"></i>
@@ -38,43 +41,70 @@
             <i class="fas fa-map-marker-alt"></i>
             <span id="citiesCount">0</span>
         </div>
+        <div class="lang-toggle" aria-label="Language toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="hi">हि</button>
+        </div>
+        <button class="shanti-toggle" id="shantiToggle" title="Shanti Mode — peaceful white">
+            <i class="fas fa-peace"></i>
+        </button>
     </div>
-    <header class="hero">
+
+    <header class="hero" id="heroSection">
         <div class="hero-content">
-            <h1 class="hero-title">In Loving Memory of a Soul Who Touched Us All.</h1>
-            <h2 class="hero-name">Neha Tomar</h2>
+            <h1 class="hero-title" data-i18n="hero.title">In Loving Memory of a Soul Who Touched Us All.</h1>
+            <h2 class="hero-name" data-i18n="hero.name">Neha Tomar</h2>
         </div>
         <div class="hero-overlay"></div>
     </header>
+
     <!-- Wavy Divider -->
     <div class="wavy-divider">
         <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 40C360 80 1080 0 1440 40V80H0V40Z" fill="#f8f9fa"/></svg>
     </div>
+
     <main>
         <!-- About Section -->
         <section class="about-section animate-on-scroll">
             <div class="container">
-                <h2>Remembering Neha Tomar</h2>
-                <p class="about-text">
+                <h2 data-i18n="section.about.heading">Remembering Neha Tomar</h2>
+                <p class="about-text" data-i18n="section.about.text">
                     Neha Tomar brought light into the lives of everyone she met — with her warmth, kindness, and gentle spirit. This memorial website is a small tribute to the love she gave so freely, and the countless memories we hold close in our hearts.
                 </p>
             </div>
         </section>
+
+        <!-- Moment Clock -->
+        <section class="moment-clock-section animate-on-scroll">
+            <div class="container">
+                <div class="moment-clock-value" id="momentClockValue"></div>
+                <div class="moment-clock-label" id="momentClockLabel" data-i18n="clock.label">Days we've carried her with us</div>
+            </div>
+        </section>
+
+        <!-- Now Remembering -->
+        <div class="now-remembering" id="nowRemembering" style="display:none;">
+            <i class="fas fa-heart"></i>
+            <span id="nowRememberingCount">0</span>
+            <span data-i18n="now.remembering">people remembering Neha right now</span>
+        </div>
+
         <!-- Wavy Divider -->
         <div class="wavy-divider">
             <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 40C360 80 1080 0 1440 40V80H0V40Z" fill="#fff"/></svg>
         </div>
+
         <!-- Candle Lighting Section -->
         <section class="candle-section animate-on-scroll">
             <div class="container">
-                <h2>Light a Candle</h2>
-                <p class="section-intro">Light a virtual candle in memory of Neha. Each candle represents a moment of remembrance and love.</p>
+                <h2 data-i18n="section.candle.heading">Light a Candle</h2>
+                <p class="section-intro" data-i18n="section.candle.intro">Light a virtual candle in memory of Neha. Each candle represents a moment of remembrance and love.</p>
                 <div class="candle-area">
                     <div class="candle-container" id="candleContainer">
                         <div class="candles-lit-label" id="candlesLitLabel">
                             <i class="fas fa-fire"></i> <span id="totalCandles">0</span>
                         </div>
-                        <!-- Candles will be added here dynamically -->
+                        <!-- Candles rendered dynamically -->
                     </div>
                     <div class="fab fab-candle" id="fabCandleLight" title="Light a Candle" aria-label="Light a Candle">
                         <i class="fas fa-fire"></i>
@@ -82,14 +112,16 @@
                 </div>
             </div>
         </section>
+
         <!-- Wavy Divider -->
         <div class="wavy-divider">
             <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 40C360 80 1080 0 1440 40V80H0V40Z" fill="#f8f9fa"/></svg>
         </div>
+
         <!-- Photo Gallery -->
         <section class="gallery-section animate-on-scroll">
             <div class="container">
-                <h2>Photo Memories</h2>
+                <h2 data-i18n="section.photo.heading">Photo Memories</h2>
                 <div class="slideshow-container" id="slideshowContainer">
                     <div class="slideshow-image-wrapper">
                         <img id="slideshowImage" src="images/2d6eaf51-e621-47d3-bd3d-56a6b2aedb59.jpg" alt="Memory of Neha Tomar">
@@ -103,15 +135,23 @@
                 </div>
             </div>
         </section>
+
         <!-- Wavy Divider -->
         <div class="wavy-divider">
             <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 40C360 80 1080 0 1440 40V80H0V40Z" fill="#fff"/></svg>
         </div>
+
         <!-- Memory Wall Section -->
         <section class="memory-wall-section animate-on-scroll">
             <div class="container">
-                <h2>Memory Wall</h2>
-                <p class="section-intro">Share your memories, thoughts, and messages for Neha. Your words will be a lasting tribute to her beautiful spirit.</p>
+                <h2 data-i18n="section.memory.heading">Memory Wall</h2>
+                <p class="section-intro" data-i18n="section.memory.intro">Share your memories, thoughts, and messages for Neha. Your words will be a lasting tribute to her beautiful spirit.</p>
+
+                <div class="memory-sort-bar">
+                    <button class="memory-sort-btn active" data-sort="newest" data-i18n="memory.sort.newest">Newest first</button>
+                    <button class="memory-sort-btn" data-sort="oldest" data-i18n="memory.sort.oldest">Oldest first</button>
+                </div>
+
                 <div class="memory-slideshow-container" id="memorySlideshowContainer">
                     <div class="memory-slideshow-content" id="memorySlideshowContent"></div>
                     <button class="slideshow-arrow left" id="memorySlideshowPrev">&#10094;</button>
@@ -120,6 +160,7 @@
                         <i class="fas fa-heart"></i>
                     </div>
                 </div>
+
                 <div class="memory-stats hide-memory-stats">
                     <div class="stat">
                         <span class="stat-number" id="totalMemories">4</span>
@@ -128,9 +169,29 @@
                 </div>
             </div>
         </section>
+
         <!-- Wavy Divider -->
         <div class="wavy-divider">
             <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 40C360 80 1080 0 1440 40V80H0V40Z" fill="#f8f9fa"/></svg>
+        </div>
+
+        <!-- Love Counter + WhatsApp Share -->
+        <section class="community-section animate-on-scroll">
+            <div class="container">
+                <div class="love-counter">
+                    <span class="love-counter-number" id="loveCounterNumber">0</span>
+                    <span class="love-counter-label" data-i18n="love.counter.label">acts of love</span>
+                </div>
+                <button class="whatsapp-share-btn" id="whatsappShareBtn" aria-label="Share on WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                    <span data-i18n="share.whatsapp">Share on WhatsApp</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Wavy Divider -->
+        <div class="wavy-divider">
+            <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 40C360 80 1080 0 1440 40V80H0V40Z" fill="#fff"/></svg>
         </div>
     </main>
 
@@ -143,23 +204,32 @@
 
     <footer class="footer">
         <div class="container">
-            <p class="footer-note">This memorial website was created with love by family and friends.</p>
-            <p class="copyright">© 2025 Vaibhav Singh<sup style="font-size:0.7em; vertical-align: super;">&trade;</sup> - All rights reserved.</p>
+            <p class="footer-note" data-i18n="footer.note">This memorial website was created with love by family and friends.</p>
+            <p class="copyright">&copy; 2025 Vaibhav Singh<sup style="font-size:0.7em; vertical-align: super;">&trade;</sup> - All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Firebase Configuration -->
-    <script src="firebase-config.js"></script>
-    <!-- DB abstraction layer — swap provider here without touching script.js -->
-    <script src="js/db-service.js"></script>
-    <script src="script.js"></script>
+    <!-- Mobile Bottom Nav -->
+    <nav class="mobile-nav" aria-label="Quick actions">
+        <button class="mobile-nav-item" id="mobileNavCandle" aria-label="Light a Candle">
+            <i class="fas fa-fire"></i>
+            <span data-i18n="nav.candle">Candle</span>
+        </button>
+        <button class="mobile-nav-item" id="mobileNavPhoto" aria-label="Share a Photo">
+            <i class="fas fa-camera"></i>
+            <span data-i18n="nav.photo">Photo</span>
+        </button>
+        <button class="mobile-nav-item" id="mobileNavMemory" aria-label="Share a Memory">
+            <i class="fas fa-heart"></i>
+            <span data-i18n="nav.memory">Memory</span>
+        </button>
+    </nav>
 
-    <!-- FABs and Modals for all sections -->
-    <!-- Photo Memories Section -->
+    <!-- Photo Upload Modal -->
     <div class="modal" id="photoUploadModal" aria-modal="true" role="dialog" style="display:none;">
         <div class="modal-content">
             <span class="modal-close" id="closePhotoUploadModal">&times;</span>
-            <h3>Share Your Photo</h3>
+            <h3 data-i18n="photo.modal.title">Share Your Photo</h3>
             <form id="photoUploadForm" class="upload-form">
                 <div class="file-input-wrapper">
                     <input type="file" id="photoFile" accept="image/*" required>
@@ -171,45 +241,63 @@
                     <img id="previewImage" src="" alt="Preview">
                     <button type="button" class="btn-remove" id="removePreview">Remove</button>
                 </div>
-                <input type="text" id="photoCaption" placeholder="Photo caption (optional)">
-                <input type="text" id="photoAuthor" placeholder="Your name (optional)">
+                <input type="text" id="photoCaption" data-i18n="photo.caption.placeholder" data-i18n-attr="placeholder" placeholder="Photo caption (optional)">
+                <input type="text" id="photoAuthor" data-i18n="photo.author.placeholder" data-i18n-attr="placeholder" placeholder="Your name (optional)">
                 <button type="submit" class="btn-upload">
-                    <i class="fas fa-upload"></i> Upload Photo
+                    <i class="fas fa-upload"></i> <span data-i18n="photo.submit">Upload Photo</span>
                 </button>
             </form>
         </div>
     </div>
-    <!-- Memory Wall Section -->
+
+    <!-- Memory Wall Modal -->
     <div class="modal" id="memoryUploadModal" aria-modal="true" role="dialog" style="display:none;">
         <div class="modal-content">
             <span class="modal-close" id="closeMemoryUploadModal">&times;</span>
-            <h3>Share a Memory</h3>
+            <h3 data-i18n="memory.modal.title">Share a Memory</h3>
             <form id="memoryForm" class="memory-form">
-                <div class="form-row">
-                    <input type="text" id="memoryName" placeholder="Your name" required>
-                    <input type="email" id="memoryEmail" placeholder="Your email (optional)">
-                </div>
-                <textarea id="memoryMessage" placeholder="Share your memory, message, or tribute..." rows="4" required></textarea>
+                <input type="text" id="memoryName" data-i18n="memory.name.placeholder" data-i18n-attr="placeholder" placeholder="Your name" required>
+                <label class="relationship-label" data-i18n="memory.relationship.label">How did you know Neha?</label>
+                <select id="memoryRelationship" class="relationship-select">
+                    <option value="friend" data-i18n="memory.relationship.friend">Friend</option>
+                    <option value="family" data-i18n="memory.relationship.family">Family</option>
+                    <option value="colleague" data-i18n="memory.relationship.colleague">Colleague</option>
+                    <option value="teacher" data-i18n="memory.relationship.teacher">Teacher</option>
+                    <option value="classmate" data-i18n="memory.relationship.classmate">Classmate</option>
+                    <option value="other" data-i18n="memory.relationship.other">Met her spirit through others</option>
+                </select>
+                <textarea id="memoryMessage" data-i18n="memory.message.placeholder" data-i18n-attr="placeholder" placeholder="Share your memory, message, or tribute..." rows="4" required></textarea>
                 <button type="submit" class="btn-add-memory">
-                    <i class="fas fa-heart"></i> Add Memory
+                    <i class="fas fa-heart"></i> <span data-i18n="memory.submit">Offer This Memory</span>
                 </button>
             </form>
         </div>
     </div>
-    <!-- Candle Lighting Section -->
+
+    <!-- Candle Lighting Modal -->
     <div class="modal" id="candleLightModal" aria-modal="true" role="dialog" style="display:none;">
         <div class="modal-content">
             <span class="modal-close" id="closeCandleLightModal">&times;</span>
-            <h3>Light a Candle</h3>
+            <h3 data-i18n="candle.modal.title">Light a Candle</h3>
             <form id="candleForm">
-                <input type="text" id="candleName" placeholder="Your name" required>
-                <textarea id="candleMessage" placeholder="Your message (optional)" rows="3"></textarea>
+                <input type="text" id="candleName" data-i18n="candle.name.placeholder" data-i18n-attr="placeholder" placeholder="Your name" required>
+                <textarea id="candleMessage" data-i18n="candle.message.placeholder" data-i18n-attr="placeholder" placeholder="Your message (optional)" rows="3"></textarea>
                 <button type="submit" class="btn-light-candle">
-                    <i class="fas fa-fire"></i> Light Candle
+                    <i class="fas fa-fire"></i> <span data-i18n="candle.submit">Light Candle</span>
                 </button>
             </form>
         </div>
     </div>
-    <!-- Place the FABs and modals just after each slideshow section -->
+
+    <!-- Firebase Configuration -->
+    <script src="firebase-config.js"></script>
+    <!-- DB abstraction layer -->
+    <script src="js/db-service.js"></script>
+    <!-- i18n: bilingual system -->
+    <script src="js/i18n.js"></script>
+    <!-- Rituals: arrival blessing, clock, petals -->
+    <script src="js/rituals.js"></script>
+    <!-- Main application logic -->
+    <script src="script.js"></script>
 </body>
-</html> 
+</html>

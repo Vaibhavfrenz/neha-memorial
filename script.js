@@ -19,7 +19,16 @@ document.addEventListener('DOMContentLoaded', function() {
         initUploadModals();
         isModalInitialized = true;
     }
-    
+
+    // i18n + rituals run as soon as DOM is ready
+    if (window.I18n) I18n.init();
+    if (window.Rituals) Rituals.init();
+
+    // Mobile nav wiring (no Firebase needed)
+    initMobileNav();
+    initShantiMode();
+    initWhatsAppShare();
+
     // Wait for Firebase to initialize
     setTimeout(() => {
         if (window.db) {
@@ -31,6 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
             initLightbox();
             initScrollToTop();
             initAnimations();
+            initLoveCounter();
+            initNowRemembering();
             isInitialized = true;
         } else {
             console.error('Firebase not initialized');
@@ -338,9 +349,11 @@ function initMemoryWall() {
     let memoryEndX = 0;
     let isMemoryDragging = false;
 
+    let rawMemories = []; // always newest-first from Firestore
     let memories = [];
     let currentMemory = 0;
     let memoryInterval = null;
+    let memorySortOrder = 'newest';
 
     function showMemory(index) {
         if (memories.length === 0) {
@@ -349,9 +362,16 @@ function initMemoryWall() {
         }
         currentMemory = (index + memories.length) % memories.length;
         const memory = memories[currentMemory];
+        const relationshipTag = memory.relationship
+            ? `<span class="memory-relationship">${memory.relationship}</span>` : '';
+        const timeStr = memory.timestamp ? formatTimeOfDay(memory.timestamp) : '';
         memorySlideshowContent.innerHTML = `
-            <div class="memory-text">"${memory.message}"</div>
-            <div class="memory-meta">${memory.name ? `- ${memory.name}` : ''} ${memory.timestamp ? `<span class="memory-date">${formatDate(memory.timestamp)}</span>` : ''}</div>
+            <div class="memory-text">"${escapeHtml(memory.message)}"</div>
+            <div class="memory-meta">
+                ${memory.name ? `<span>— ${escapeHtml(memory.name)}</span>` : ''}
+                ${relationshipTag}
+                ${timeStr ? `<span class="memory-time">${timeStr}</span>` : ''}
+            </div>
         `;
     }
 
@@ -408,15 +428,17 @@ function initMemoryWall() {
         startMemorySlideshow();
     });
 
+    function applySortOrder() {
+        memories = memorySortOrder === 'oldest' ? [...rawMemories].reverse() : [...rawMemories];
+    }
+
     // Listen for real-time updates
     db.collection('memories')
         .orderBy('timestamp', 'desc')
         .onSnapshot((snapshot) => {
-            memories = [];
-            snapshot.forEach((doc) => {
-                const memory = { id: doc.id, ...doc.data() };
-                memories.push(memory);
-            });
+            rawMemories = [];
+            snapshot.forEach((doc) => rawMemories.push({ id: doc.id, ...doc.data() }));
+            applySortOrder();
             showMemory(0);
             updateMemoryStats(memories.length);
             startMemorySlideshow();
@@ -425,27 +447,16 @@ function initMemoryWall() {
             memorySlideshowContent.innerHTML = '<div class="memory-text">Error loading memories. Please refresh.</div>';
         });
 
-    memoryForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const name = document.getElementById('memoryName').value.trim();
-        const email = document.getElementById('memoryEmail').value.trim();
-        const message = document.getElementById('memoryMessage').value.trim();
-        if (!name || !message) return;
-        const memory = {
-            name: name,
-            email: email,
-            message: message,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        };
-        db.collection('memories').add(memory)
-            .then(() => {
-                memoryForm.reset();
-                showNotification('Memory added successfully! 💝', 'success');
-            })
-            .catch((error) => {
-                console.error('Error adding memory:', error);
-                showNotification('Error adding memory. Please try again.', 'error');
-            });
+    // Sort bar
+    document.querySelectorAll('.memory-sort-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.memory-sort-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            memorySortOrder = btn.dataset.sort;
+            applySortOrder();
+            currentMemory = 0;
+            showMemory(0);
+        });
     });
 
     function updateMemoryStats(count) {
@@ -460,6 +471,24 @@ function initMemoryWall() {
             day: 'numeric'
         });
     }
+}
+
+function formatTimeOfDay(timestamp) {
+    if (!timestamp || !timestamp.toDate) return '';
+    const date = timestamp.toDate();
+    const h = date.getHours();
+    if (h >= 5 && h < 12) return '🌅 morning';
+    if (h >= 12 && h < 17) return '☀️ afternoon';
+    if (h >= 17 && h < 21) return '🌆 evening';
+    return '🌙 night';
+}
+
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
 }
 
 // Lightbox Feature
@@ -1040,30 +1069,31 @@ function initializeMemoryUpload() {
         memoryForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('memoryName').value.trim();
-            const email = document.getElementById('memoryEmail').value.trim();
             const message = document.getElementById('memoryMessage').value.trim();
-            
+            const relationshipEl = document.getElementById('memoryRelationship');
+            const relationship = relationshipEl ? relationshipEl.value : '';
+
             if (!name || !message) {
                 showNotification('Please fill in all required fields.', 'error');
                 return;
             }
-            
+
             const submitBtn = memoryForm.querySelector('.btn-add-memory');
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Offering...';
             submitBtn.disabled = true;
-            
+
             const memory = {
                 name: name,
-                email: email,
                 message: message,
+                relationship: relationship,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             };
-            
+
             db.collection('memories').add(memory)
                 .then(() => {
                     memoryForm.reset();
-                    showNotification('Memory shared successfully! 💝', 'success');
+                    showOfferingReceipt(name);
                 })
                 .catch((error) => {
                     console.error('Error adding memory:', error);
@@ -1075,6 +1105,21 @@ function initializeMemoryUpload() {
                 });
         });
     }
+}
+
+function showOfferingReceipt(name) {
+    const modal = document.getElementById('memoryUploadModal');
+    const receiptText = window.I18n ? window.I18n.t('memory.receipt')
+        : `Your memory has been placed on the wall. Neha's family will see this.`;
+    const receipt = document.createElement('div');
+    receipt.className = 'offering-receipt';
+    receipt.innerHTML = `<i class="fas fa-paper-plane"></i> ${receiptText}`;
+    const form = document.getElementById('memoryForm');
+    if (form) form.insertAdjacentElement('afterend', receipt);
+    setTimeout(() => {
+        receipt.remove();
+        if (modal) { modal.style.display = 'none'; document.body.style.overflow = ''; }
+    }, 3000);
 }
 
 // Initialize candle upload functionality
@@ -1144,6 +1189,92 @@ function initializeCandleUpload() {
 function updateSlideshowCaption(photo) {
   const captionDiv = document.getElementById('slideshowCaption');
   captionDiv.innerHTML =
-    `<span>${photo.caption ? photo.caption : ''}</span>` +
-    (photo.author ? `<span class="caption-author">${photo.author}</span>` : '');
+    `<span>${photo.caption ? escapeHtml(photo.caption) : ''}</span>` +
+    (photo.author ? `<span class="caption-author">${escapeHtml(photo.author)}</span>` : '');
+}
+
+// --- Mobile Bottom Nav ---
+function initMobileNav() {
+    const mobileNavCandle = document.getElementById('mobileNavCandle');
+    const mobileNavPhoto = document.getElementById('mobileNavPhoto');
+    const mobileNavMemory = document.getElementById('mobileNavMemory');
+    const fabCandle = document.getElementById('fabCandleLight');
+    const fabPhoto = document.getElementById('fabPhotoUpload');
+    const fabMemory = document.getElementById('fabMemoryUpload');
+
+    if (mobileNavCandle && fabCandle) mobileNavCandle.addEventListener('click', () => fabCandle.click());
+    if (mobileNavPhoto && fabPhoto) mobileNavPhoto.addEventListener('click', () => fabPhoto.click());
+    if (mobileNavMemory && fabMemory) mobileNavMemory.addEventListener('click', () => fabMemory.click());
+}
+
+// --- Shanti Mode ---
+function initShantiMode() {
+    const btn = document.getElementById('shantiToggle');
+    if (!btn) return;
+    const stored = localStorage.getItem('neha_shanti');
+    if (stored === '1') document.body.classList.add('shanti-mode');
+
+    btn.addEventListener('click', () => {
+        const on = document.body.classList.toggle('shanti-mode');
+        localStorage.setItem('neha_shanti', on ? '1' : '0');
+    });
+}
+
+// --- Love Counter (candles + memories) ---
+function initLoveCounter() {
+    const counterEl = document.getElementById('loveCounterNumber');
+    if (!counterEl) return;
+
+    function update() {
+        Promise.all([
+            db.collection('candles').get(),
+            db.collection('memories').get()
+        ]).then(([candles, memories]) => {
+            const total = candles.size + memories.size;
+            counterEl.textContent = total.toLocaleString();
+        }).catch(() => {});
+    }
+    update();
+    setInterval(update, 60000);
+}
+
+// --- Now Remembering (live presence via .info/connected) ---
+function initNowRemembering() {
+    const el = document.getElementById('nowRemembering');
+    const countEl = document.getElementById('nowRememberingCount');
+    if (!el || !countEl) return;
+
+    // Use Firestore presence collection
+    const presenceRef = db.collection('presence');
+    const myDoc = presenceRef.doc();
+    myDoc.set({ online: true, timestamp: firebase.firestore.FieldValue.serverTimestamp() })
+        .catch(() => {});
+
+    presenceRef.where('online', '==', true).onSnapshot((snap) => {
+        const count = snap.size;
+        if (count > 1) {
+            countEl.textContent = count;
+            el.style.display = 'flex';
+        } else {
+            el.style.display = 'none';
+        }
+    }, () => {});
+
+    // Clean up on unload
+    window.addEventListener('beforeunload', () => {
+        myDoc.delete().catch(() => {});
+    });
+}
+
+// --- WhatsApp Share ---
+function initWhatsAppShare() {
+    const btn = document.getElementById('whatsappShareBtn');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+        const lang = window.I18n ? window.I18n.getLang() : 'en';
+        const msg = window.I18n ? window.I18n.t('share.whatsapp.message') : "Come remember Neha Tomar with us:";
+        const url = 'https://vaibhavfrenz.github.io/neha-memorial/';
+        const text = encodeURIComponent(`${msg} ${url}`);
+        window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener');
+    });
 }
