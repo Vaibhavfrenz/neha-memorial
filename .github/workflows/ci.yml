@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [master, feature-branch]
+  pull_request:
+    branches: [master]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate & Quality Check
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required files exist
+        run: |
+          files=("index.html" "styles.css" "script.js" "firebase-config.js" "js/db-service.js")
+          for f in "${files[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "MISSING: $f"
+              exit 1
+            else
+              echo "OK: $f"
+            fi
+          done
+
+      - name: Check HTML structure
+        run: |
+          # Verify key structural elements are present
+          grep -q '<meta property="og:title"' index.html && echo "OK: OG title" || echo "WARN: Missing OG title"
+          grep -q '<meta property="og:image"' index.html && echo "OK: OG image" || echo "WARN: Missing OG image"
+          grep -q 'db-service.js' index.html && echo "OK: db-service loaded" || echo "WARN: db-service.js not referenced in index.html"
+          grep -q 'lang=' index.html && echo "OK: lang attribute" || echo "WARN: Missing lang attribute"
+
+      - name: Check for console.log in production JS
+        run: |
+          count=$(grep -c "console\.log" script.js || true)
+          echo "console.log calls in script.js: $count"
+          if [ "$count" -gt 20 ]; then
+            echo "WARN: High number of console.log statements ($count) — consider removing before production"
+          fi
+
+      - name: Validate UTF-8 encoding
+        run: |
+          if file script.js | grep -q "UTF-16"; then
+            echo "ERROR: script.js is UTF-16 encoded. Convert to UTF-8."
+            exit 1
+          else
+            echo "OK: script.js encoding"
+          fi
