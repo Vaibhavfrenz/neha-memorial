@@ -1,7 +1,7 @@
 // Firebase Configuration for Neha Memorial Website
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC4db5c4_fYkLlTrTcNuK0ONSwspsWVvVY",
+    apiKey: "AIzaSyB0uidyCgzoWXSWXL3H1wGr-4hflwJ4ayc",
     authDomain: "neha-memorial-website-1f540.firebaseapp.com",
     projectId: "neha-memorial-website-1f540",
     storageBucket: "neha-memorial-website-1f540.firebasestorage.app",

@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Local development files
 local-dev.html
@@ -10,6 +13,13 @@ test.html
 
 # Admin service account key (sensitive — never commit)
 admin/neha-memorial-website-1f540-firebase-adminsdk-fbsvc-12de9073a0.json
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
 
 # OS generated files
 .DS_Store
@@ -28,7 +38,12 @@ Thumbs.db
 *~
 
 # Logs
+logs
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+
+# Temporary / build
+tmp/
+temp/
+dist/
+build/
+coverage/
